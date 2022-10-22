@@ -1,0 +1,10 @@
+emailage.com    REJECT Blacklisted. Your data collection is not welcomed by this server.
+mail.soap.towerdata.com REJECT Blacklisted. Your data collection is not welcomed by this server.
+*.netvigator.com    REJECT Blacklisted. Your servers allow forged From: headers from clients you relay for, then bounce messages when they are rejected.
+mail.sonic.altserver.com    REJECT Blacklisted. Your servers allow forged From: headers from clients you relay for, then bounce messages when they are rejected.
+*.eonet.ne.jp   REJECT Blacklisted. Your servers allow forged From: headers from clients you relay for, then bounce messages when they are rejected.
+thechecker.co   REJECT Blacklisted. Your data collection is not welcomed by this server.
+verifications.io    REJECT Blacklisted. Your data collection is not welcomed by this server.
+*.verifications.io    REJECT Blacklisted. Your data collection is not welcomed by this server.
+emaillisttracking.com   REJECT Blacklisted. Your data collection is not welcomed by this server.
+*.emaillisttracking.com REJECT Blacklisted. Your data collection is not welcomed by this server.

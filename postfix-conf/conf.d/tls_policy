@@ -1,0 +1,2 @@
+gmail.com     secure match=mx.google.com:.mx.google.com
+.gmail.com    secure match=mx.google.com:.mx.google.com

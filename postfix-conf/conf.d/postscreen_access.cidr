@@ -1,0 +1,28 @@
+# Google IP6 ranges Sept 6, 2018
+2001:4860:4000::/36     permit
+2404:6800:4000::/36     permit
+2607:f8b0:4000::/36     permit
+2800:3f0:4000::/36      permit
+2a00:1450:4000::/36     permit
+2c0f:fb50:4000::/36     permit
+
+# Google IP4 ranges Sept 7, 2018
+35.190.247.0/24 permit
+64.233.160.0/19 permit
+66.102.0.0/20   permit
+66.249.80.0/20  permit
+72.14.192.0/18  permit
+74.125.0.0/16   permit
+108.177.8.0/21  permit
+173.194.0.0/16  permit
+209.85.128.0/17 permit
+216.58.192.0/19 permit
+216.239.32.0/19 permit
+172.217.0.0/19  permit
+172.217.32.0/20 permit
+172.217.128.0/19        permit
+172.217.160.0/20        permit
+172.217.192.0/19        permit
+108.177.96.0/19 permit
+35.191.0.0/16   permit
+130.211.0.0/22  permit
