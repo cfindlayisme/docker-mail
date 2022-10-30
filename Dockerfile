@@ -71,6 +71,8 @@ RUN echo "smtpd_recipient_restrictions = " >> /etc/postfix/main.cf && \
     echo "    reject_rhsbl_client  fresh.spameatingmonkey.net," >> /etc/postfix/main.cf && \
     echo "    permit" >> /etc/postfix/main.cf
 
+# Mostly anti-spam measures - can be a little agressive, but less resource-intensive than spamassassin
+# TODO: local DNS caching since this is pretty heavy on DNS lookups
 RUN echo "postscreen_access_list = permit_mynetworks, cidr:/etc/postfix/conf.d/postscreen_access.cidr" >> /etc/postfix/main.cf && \
     echo "postscreen_dnsbl_sites =" >> /etc/postfix/main.cf && \
     echo "        zen.spamhaus.org*3" >> /etc/postfix/main.cf && \
@@ -103,6 +105,7 @@ RUN echo "postscreen_access_list = permit_mynetworks, cidr:/etc/postfix/conf.d/p
     echo "postscreen_use_tls = \$smtpd_use_tls" >> /etc/postfix/main.cf && \
     echo "postscreen_client_connection_count_limit = \$smtpd_client_connection_count_limit" >> /etc/postfix/main.cf
 
+# vmail stuff - for the virtual mailboxes
 RUN \
     echo "home_mailbox = Maildir/" && \
     echo "virtual_mailbox_domains = /etc/postfix/vhosts" && \
