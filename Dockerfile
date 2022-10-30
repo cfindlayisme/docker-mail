@@ -16,7 +16,7 @@ RUN sed -i '/smtpd_banner*/c\smtpd_banner = $myhostname ESMTP' /etc/postfix/main
 # SASL auth related
 RUN sed -i '/smtp_sasl_auth_enable*/c\smtp_sasl_auth_enable = yes' /etc/postfix/main.cf && \
     sed -i '/smtp_sasl_security_options*/c\smtp_sasl_security_options = noanonymous' /etc/postfix/main.cf && \
-    sed -i '/smtp_sasl_password_maps*/c\smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd' /etc/postfix/main.cf && \
+#    sed -i '/smtp_sasl_password_maps*/c\smtp_sasl_password_maps = lmdb:/etc/postfix/sasl_passwd' /etc/postfix/main.cf && \
     sed -i '/smtp_tls_security_level*/c\smtp_tls_security_level = may' /etc/postfix/main.cf && \
     sed -i '/smtp_tls_CAfile*/c\smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt' /etc/postfix/main.cf
 
@@ -32,22 +32,32 @@ RUN echo 'tls_ssl_options = NO_COMPRESSION' >> /etc/postfix/main.cf && \
     echo 'smtpd_tls_key_file=/keys/privkey.pem' >> /etc/postfix/main.cf && \
     echo 'smtp_tls_cert_file=/keys/fullchain.pem' >> /etc/postfix/main.cf && \
     echo 'smtp_tls_key_file=/keys/privkey.pem' >> /etc/postfix/main.cf && \
-    echo 'smtp_tls_policy_maps = hash:/etc/postfix/conf.d/tls_policy' >> /etc/postfix/main.cf && \
+    echo 'smtp_tls_policy_maps = lmdb:/etc/postfix/conf.d/tls_policy' >> /etc/postfix/main.cf && \
     echo 'smtp_tls_CApath = /etc/ssl/certs/' >> /etc/postfix/main.cf && \
     echo 'smtpd_tls_CApath = /etc/ssl/certs/' >> /etc/postfix/main.cf && \
     echo 'smtpd_tls_ask_ccert = yes' >> /etc/postfix/main.cf && \
     echo 'smtpd_tls_req_ccert = no' >> /etc/postfix/main.cf && \
     mkdir /etc/postfix/conf.d
 
+# Hash files for access policies
 COPY postfix-conf/conf.d/helo_access /etc/postfix/conf.d
 COPY postfix-conf/conf.d/sender_access /etc/postfix/conf.d
 COPY postfix-conf/conf.d/tls_policy /etc/postfix/conf.d
+RUN \
+    postmap /etc/postfix/conf.d/tls_policy && \
+    postmap /etc/postfix/conf.d/helo_access && \
+    postmap /etc/postfix/conf.d/sender_access
+
+# Not really used, but blank to quiet it up
+RUN \
+    echo "" > /etc/postfix/aliases && \
+    postmap /etc/postfix/aliases
 
 RUN echo "smtpd_recipient_restrictions = " >> /etc/postfix/main.cf && \
     echo "    permit_sasl_authenticated," >> /etc/postfix/main.cf && \
-    echo "    check_helo_access hash:/etc/postfix/conf.d/helo_access," >> /etc/postfix/main.cf && \
+    echo "    check_helo_access lmdb:/etc/postfix/conf.d/helo_access," >> /etc/postfix/main.cf && \
     echo "    # Has blacklisted senders/domains in it" >> /etc/postfix/main.cf && \
-    echo "    check_sender_access hash:/etc/postfix/conf.d/sender_access," >> /etc/postfix/main.cf && \
+    echo "    check_sender_access lmdb:/etc/postfix/conf.d/sender_access," >> /etc/postfix/main.cf && \
     echo "    # Some stuff to be strict about" >> /etc/postfix/main.cf && \
     echo "    reject_invalid_hostname," >> /etc/postfix/main.cf && \
     echo "    reject_unknown_recipient_domain," >> /etc/postfix/main.cf && \
@@ -92,6 +102,16 @@ RUN echo "postscreen_access_list = permit_mynetworks, cidr:/etc/postfix/conf.d/p
     echo "postscreen_tls_security_level = \$smtpd_tls_security_level" >> /etc/postfix/main.cf && \
     echo "postscreen_use_tls = \$smtpd_use_tls" >> /etc/postfix/main.cf && \
     echo "postscreen_client_connection_count_limit = \$smtpd_client_connection_count_limit" >> /etc/postfix/main.cf
+
+RUN \
+    echo "home_mailbox = Maildir/" && \
+    echo "virtual_mailbox_domains = /etc/postfix/vhosts" && \
+    mkdir /vmail && \
+    echo "virtual_mailbox_base = /vmail" && \
+    echo "virtual_mailbox_maps = lmdb:/etc/postfix/vmaps" && \
+    echo "virtual_minimum_uid = 1000"
+#    echo "virtual_uid_maps = static:5000" && \
+#    echo "virtual_gid_maps = static:5000"
 
 EXPOSE 25
 
