@@ -53,6 +53,8 @@ RUN \
     echo "" > /etc/postfix/aliases && \
     postmap /etc/postfix/aliases
 
+# The checks to run on the incoming mail - lot of it will be processed by postscreen which is further below
+# But, some basic checks are done here that are not very CPU intensive
 RUN echo "smtpd_recipient_restrictions = " >> /etc/postfix/main.cf && \
     echo "    permit_sasl_authenticated," >> /etc/postfix/main.cf && \
     echo "    check_helo_access lmdb:/etc/postfix/conf.d/helo_access," >> /etc/postfix/main.cf && \
