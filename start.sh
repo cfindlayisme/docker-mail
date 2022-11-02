@@ -20,6 +20,7 @@ echo "Creating hashmaps for postfix"
 cp /config/vhosts /etc/postfix/vhosts
 cp /config/vmaps /etc/postfix/vmaps
 postmap /etc/postfix/vmaps
+postmap /etc/postfix/vhosts
 
 echo "Starting syslog & postfix"
 rsyslogd

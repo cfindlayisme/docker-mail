@@ -11,7 +11,7 @@ RUN apk add postfix openssl ca-certificates rsyslog sed
 # General postfix stuff
 RUN sed -i '/smtpd_banner*/c\smtpd_banner = $myhostname ESMTP' /etc/postfix/main.cf && \
     sed -i '/inet_protocols*/c\inet_protocols = ipv4, ipv6' /etc/postfix/main.cf && \
-    sed -i '/mynetworks*/c\mynetworks = 127.0.0.0/8 [::0ffff:127.0.0.0]/104 [::1]/128 172.17.0.0/16' /etc/postfix/main.cf
+    sed -i '/mynetworks*/c\mynetworks = 127.0.0.0/8 [::0ffff:127.0.0.0]/104 [::1]/128' /etc/postfix/main.cf
 
 # SASL auth related
 RUN sed -i '/smtp_sasl_auth_enable*/c\smtp_sasl_auth_enable = yes' /etc/postfix/main.cf && \
@@ -108,15 +108,16 @@ RUN echo "postscreen_access_list = permit_mynetworks, cidr:/etc/postfix/conf.d/p
     echo "postscreen_client_connection_count_limit = \$smtpd_client_connection_count_limit" >> /etc/postfix/main.cf
 
 # vmail stuff - for the virtual mailboxes
+# TODO: gid/uid map needs to be adjusted on container bootup via env variable or such
 RUN \
-    echo "home_mailbox = Maildir/" && \
-    echo "virtual_mailbox_domains = /etc/postfix/vhosts" && \
+    echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf && \
+    echo "virtual_mailbox_domains = lmdb:/etc/postfix/vhosts" >> /etc/postfix/main.cf && \
     mkdir /vmail && \
-    echo "virtual_mailbox_base = /vmail" && \
-    echo "virtual_mailbox_maps = lmdb:/etc/postfix/vmaps" && \
-    echo "virtual_minimum_uid = 1000"
-#    echo "virtual_uid_maps = static:5000" && \
-#    echo "virtual_gid_maps = static:5000"
+    echo "virtual_mailbox_base = /vmail" >> /etc/postfix/main.cf && \
+    echo "virtual_mailbox_maps = lmdb:/etc/postfix/vmaps" >> /etc/postfix/main.cf && \
+    echo "virtual_minimum_uid = 1000" >> /etc/postfix/main.cf && \
+    echo "virtual_uid_maps = static:1000" >> /etc/postfix/main.cf && \
+    echo "virtual_gid_maps = static:1000" >> /etc/postfix/main.cf
 
 EXPOSE 25
 
