@@ -8,6 +8,11 @@ ENV MAILNAME=smtp.in.example.com
 
 RUN apk add postfix openssl ca-certificates rsyslog sed
 
+# Make postscren active - does a lot of our filtering. Requires a couple other services too
+RUN sed -i '/^smtp      inet*/c\smtp      inet  n       -       n       -       1       postscreen' /etc/postfix/master.cf && \
+    sed -i '/^\#dnsblog   unix*/c\dnsblog   unix  -       -       n       -       0       dnsblog' /etc/postfix/master.cf && \
+    sed -i '/^#smtpd*/c\smtpd     pass  -       -       n       -       -       smtpd' /etc/postfix/master.cf
+
 # General postfix stuff
 RUN sed -i '/smtpd_banner*/c\smtpd_banner = $myhostname ESMTP' /etc/postfix/main.cf && \
     sed -i '/inet_protocols*/c\inet_protocols = ipv4, ipv6' /etc/postfix/main.cf && \
@@ -43,6 +48,7 @@ RUN echo 'tls_ssl_options = NO_COMPRESSION' >> /etc/postfix/main.cf && \
 COPY postfix-conf/conf.d/helo_access /etc/postfix/conf.d
 COPY postfix-conf/conf.d/sender_access /etc/postfix/conf.d
 COPY postfix-conf/conf.d/tls_policy /etc/postfix/conf.d
+COPY postfix-conf/conf.d/postscreen_access.cidr /etc/postfix/conf.d
 RUN \
     postmap /etc/postfix/conf.d/tls_policy && \
     postmap /etc/postfix/conf.d/helo_access && \
