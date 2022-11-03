@@ -19,8 +19,10 @@ echo $MAILNAME > /etc/mailname
 echo "Creating hashmaps for postfix"
 cp /config/vhosts /etc/postfix/vhosts
 cp /config/vmaps /etc/postfix/vmaps
+cp /config/valiases /etc/postfix/valiases
 postmap /etc/postfix/vmaps
 postmap /etc/postfix/vhosts
+postmap /etc/postfix/valiases
 
 echo "Starting syslog & postfix"
 rsyslogd

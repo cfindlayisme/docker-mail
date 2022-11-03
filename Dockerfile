@@ -117,6 +117,7 @@ RUN echo "postscreen_access_list = permit_mynetworks, cidr:/etc/postfix/conf.d/p
 # TODO: gid/uid map needs to be adjusted on container bootup via env variable or such
 RUN \
     echo "home_mailbox = Maildir/" >> /etc/postfix/main.cf && \
+    echo "virtual_alias_maps = lmdb:/etc/postfix/valiases" >> /etc/postfix/main.cf && \
     echo "virtual_mailbox_domains = lmdb:/etc/postfix/vhosts" >> /etc/postfix/main.cf && \
     mkdir /vmail && \
     echo "virtual_mailbox_base = /vmail" >> /etc/postfix/main.cf && \
