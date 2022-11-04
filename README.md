@@ -13,6 +13,9 @@ Volumes:
   - vhosts
     - Format is DOMAIN \<TAB\> OK
     - ```example.com  OK```
+  - valiases
+    - Format is EMAIL \<TAB\> EMAIL
+    - ```aliased_email@example.com user@example.com```
 - /keys
   - TODO: document this
 - /vmail
