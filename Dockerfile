@@ -130,4 +130,4 @@ EXPOSE 25
 
 COPY start.sh /usr/bin
 
-CMD /bin/sh
+CMD /usr/bin/start.sh
