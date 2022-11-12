@@ -20,7 +20,7 @@ RUN sed -i '/smtpd_banner*/c\smtpd_banner = $myhostname ESMTP' /etc/postfix/main
 
 # SASL auth related
 RUN sed -i '/smtp_sasl_auth_enable*/c\smtp_sasl_auth_enable = yes' /etc/postfix/main.cf && \
-    sed -i '/smtp_sasl_security_options*/c\smtp_sasl_security_options = noanonymous' /etc/postfix/main.cf && \
+    sed -i '/smtp_sasl_security_options*/c\smtp_sasl_security_options = noanonymous' /etc/postfix/main.cf
 #    sed -i '/smtp_sasl_password_maps*/c\smtp_sasl_password_maps = lmdb:/etc/postfix/sasl_passwd' /etc/postfix/main.cf && \
 
 # Special SSL settings
