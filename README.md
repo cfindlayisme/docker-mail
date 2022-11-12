@@ -8,6 +8,7 @@ Some more TODO:
 - Verify SSL on postfix incoming is good
 - Configure postfix outgoing submission service
 - Spam mitigation beyond postscreen
+- OpenDKIM implementation needs to be added
 
 Completed:
 - Incoming mail works
