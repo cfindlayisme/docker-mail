@@ -9,11 +9,11 @@ Some more TODO:
 - Configure postfix outgoing submission service
 - Spam mitigation beyond postscreen
 - OpenDKIM implementation needs to be added
+- Write documentation for /config/dovecot-passwd and /config/dovecot-users
 
 Completed:
 - Incoming mail works
 - Dovecot IMAP SSL works
-- Write documentation for /config/dovecot-passwd and /config/dovecot-users
 
 Volumes:
 - /config
