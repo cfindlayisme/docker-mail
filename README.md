@@ -1,8 +1,8 @@
-Work in progress, intended as my backup if gmail ever went to crap. (November 2022)
+Work in progress, intended to switch over to it eventually.
+
+Trying to keep resources low on it so it will not require much. and minimal configuration so that disaster recovery is easy peasy.
 
 Configured setup to not require SQL database since it's only really for a small amount of users.
-
-**Should** be able to deploy with multiple replicas in kubernetes - still need to test this
 
 Volumes:
 - /config
@@ -19,5 +19,5 @@ Volumes:
 - /keys
   - TODO: document this
 - /vmail
-  - Holds the actual virtual mailboxes
+  - Holds the actual virtual mailboxes (with trailing / in vmaps should be Maildir format)
   - TODO: Fix it so it's not static UID/GID of 1000
