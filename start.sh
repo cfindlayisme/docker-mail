@@ -24,8 +24,17 @@ postmap /etc/postfix/vmaps
 postmap /etc/postfix/vhosts
 postmap /etc/postfix/valiases
 
-echo "Starting syslog & postfix"
+echo "Copying over dovecot user & passwords"
+cp /config/dovecot-users /etc/dovecot/dovecot-users
+cp /config/dovecot-passwd /etc/dovecot/dovecot-passwd
+
+echo "Starting rsyslog"
 rsyslogd
+
+echo "Starting dovecot"
+dovecot
+
+echo "Starting postfix"
 postfix start
 
 tail -f /var/log/mail.log
