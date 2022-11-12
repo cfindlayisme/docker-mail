@@ -1,8 +1,6 @@
 Work in progress, intended to switch over to it eventually.
 
-Trying to keep resources low on it so it will not require much. and minimal configuration so that disaster recovery is easy peasy.
-
-Configured setup to not require SQL database since it's only really for a small amount of users.
+This is my mailserver in a docker container to make administration of it 10000% easier. Usual postfix/dovecot stack - nothing fancy. Low on resource usage so I can use tiny VMs to run it.
 
 Some more TODO:
 - Configure postfix outgoing submission service
