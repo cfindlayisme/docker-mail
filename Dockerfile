@@ -127,6 +127,7 @@ RUN \
     echo "virtual_gid_maps = static:1000" >> /etc/postfix/main.cf
 
 EXPOSE 25
+EXPOSE 587
 
 COPY start.sh /usr/bin
 
