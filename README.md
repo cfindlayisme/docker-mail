@@ -5,7 +5,6 @@ Trying to keep resources low on it so it will not require much. and minimal conf
 Configured setup to not require SQL database since it's only really for a small amount of users.
 
 Some more TODO:
-- Verify SSL on postfix incoming is good
 - Configure postfix outgoing submission service
 - Spam mitigation beyond postscreen
 - OpenDKIM implementation needs to be added
@@ -14,6 +13,8 @@ Some more TODO:
 Completed:
 - Incoming mail works
 - Dovecot IMAP SSL works
+- Incoming mail SSL works (ie, port 25 STARTTLS)
+- dhparam doesn't auto regenerate every launch
 
 Volumes:
 - /config
