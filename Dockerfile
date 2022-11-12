@@ -25,8 +25,8 @@ RUN sed -i '/smtp_sasl_auth_enable*/c\smtp_sasl_auth_enable = yes' /etc/postfix/
 
 # Special SSL settings
 RUN echo "smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt" >> /etc/postfix/main.cf && \
-    echo "smtp_tls_secuity_level = may" >> /etc/postfix/main.cf && \
-    echo "smtpd_tls_secuity_level = may" >> /etc/postfix/main.cf && \
+    echo "smtp_tls_security_level = may" >> /etc/postfix/main.cf && \
+    echo "smtpd_tls_security_level = may" >> /etc/postfix/main.cf && \
     echo 'tls_ssl_options = NO_COMPRESSION' >> /etc/postfix/main.cf && \
     echo 'smtp_tls_loglevel = 1' >> /etc/postfix/main.cf && \
     echo 'smtp_tls_exclude_ciphers = aNULL, MD5 , DES, ADH, RC4, PSD, SRP, 3DES, eNULL' >> /etc/postfix/main.cf && \
@@ -111,8 +111,7 @@ RUN echo "postscreen_access_list = permit_mynetworks, cidr:/etc/postfix/conf.d/p
     echo "postscreen_dnsbl_threshold = 3" >> /etc/postfix/main.cf && \
     echo "postscreen_dnsbl_whitelist_threshold = -1" >> /etc/postfix/main.cf && \
     echo "postscreen_helo_required = \$smtpd_helo_required" >> /etc/postfix/main.cf && \
-    echo "postscreen_tls_security_level = \$smtpd_tls_security_level" >> /etc/postfix/main.cf && \
-    echo "postscreen_use_tls = \$smtpd_use_tls" >> /etc/postfix/main.cf && \
+    echo "postscreen_tls_security_level = may" >> /etc/postfix/main.cf && \
     echo "postscreen_client_connection_count_limit = \$smtpd_client_connection_count_limit" >> /etc/postfix/main.cf
 
 # vmail stuff - for the virtual mailboxes
