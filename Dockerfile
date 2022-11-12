@@ -130,6 +130,7 @@ COPY dovecot-conf /etc/dovecot
 
 EXPOSE 25
 EXPOSE 587
+EXPOSE 993
 
 COPY start.sh /usr/bin
 
