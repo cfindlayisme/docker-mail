@@ -22,11 +22,12 @@ RUN sed -i '/smtpd_banner*/c\smtpd_banner = $myhostname ESMTP' /etc/postfix/main
 RUN sed -i '/smtp_sasl_auth_enable*/c\smtp_sasl_auth_enable = yes' /etc/postfix/main.cf && \
     sed -i '/smtp_sasl_security_options*/c\smtp_sasl_security_options = noanonymous' /etc/postfix/main.cf && \
 #    sed -i '/smtp_sasl_password_maps*/c\smtp_sasl_password_maps = lmdb:/etc/postfix/sasl_passwd' /etc/postfix/main.cf && \
-    sed -i '/smtp_tls_security_level*/c\smtp_tls_security_level = may' /etc/postfix/main.cf && \
-    sed -i '/smtp_tls_CAfile*/c\smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt' /etc/postfix/main.cf
 
 # Special SSL settings
-RUN echo 'tls_ssl_options = NO_COMPRESSION' >> /etc/postfix/main.cf && \
+RUN echo "smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt" >> /etc/postfix/main.cf && \
+    echo "smtp_tls_secuity_level = may" >> /etc/postfix/main.cf && \
+    echo "smtpd_tls_secuity_level = may" >> /etc/postfix/main.cf && \
+    echo 'tls_ssl_options = NO_COMPRESSION' >> /etc/postfix/main.cf && \
     echo 'smtp_tls_loglevel = 1' >> /etc/postfix/main.cf && \
     echo 'smtp_tls_exclude_ciphers = aNULL, MD5 , DES, ADH, RC4, PSD, SRP, 3DES, eNULL' >> /etc/postfix/main.cf && \
     echo 'tls_high_cipherlist = TLS13-CHACHA20-POLY1305-SHA256:TLS13-AES-256-GCM-SHA384:TLS13-AES-128-GCM-SHA256:EECDH+AESGCM:ECDHE-RSA-AES256-SHA384' >> /etc/postfix/main.cf && \
@@ -126,7 +127,7 @@ RUN \
     echo "virtual_uid_maps = static:1000" >> /etc/postfix/main.cf && \
     echo "virtual_gid_maps = static:1000" >> /etc/postfix/main.cf
 
-COPY dovecot-conf /etc/dovecot
+COPY dovecot-conf /etc/dovecotS
 
 EXPOSE 25
 EXPOSE 587
