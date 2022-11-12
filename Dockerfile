@@ -6,7 +6,7 @@ FROM alpine:3.16
 # ENV variable to use
 ENV MAILNAME=smtp.in.example.com
 
-RUN apk add postfix openssl ca-certificates rsyslog sed
+RUN apk add postfix openssl ca-certificates rsyslog sed dovecot
 
 # Make postscren active - does a lot of our filtering. Requires a couple other services too
 RUN sed -i '/^smtp      inet*/c\smtp      inet  n       -       n       -       1       postscreen' /etc/postfix/master.cf && \
