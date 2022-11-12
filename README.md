@@ -9,6 +9,7 @@ Some more TODO:
 - Spam mitigation beyond postscreen
 - OpenDKIM implementation needs to be added
 - Write documentation for /config/dovecot-passwd and /config/dovecot-users
+- Write logs to somewhere persistant
 
 Completed:
 - Incoming mail works
