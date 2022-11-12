@@ -4,6 +4,16 @@ Trying to keep resources low on it so it will not require much. and minimal conf
 
 Configured setup to not require SQL database since it's only really for a small amount of users.
 
+Some more TODO:
+- Verify SSL on postfix incoming is good
+- Configure postfix outgoing submission service
+- Spam mitigation beyond postscreen
+
+Completed:
+- Incoming mail works
+- Dovecot IMAP SSL works
+- Write documentation for /config/dovecot-passwd and /config/dovecot-users
+
 Volumes:
 - /config
   - vmaps
