@@ -127,7 +127,7 @@ RUN \
     echo "virtual_uid_maps = static:1000" >> /etc/postfix/main.cf && \
     echo "virtual_gid_maps = static:1000" >> /etc/postfix/main.cf
 
-COPY dovecot-conf /etc/dovecotS
+COPY dovecot-conf/dovecot.conf /etc/dovecot
 
 EXPOSE 25
 EXPOSE 587
