@@ -43,6 +43,7 @@ RUN echo "smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt" >> /etc/postfix/
     echo 'smtpd_tls_CApath = /etc/ssl/certs/' >> /etc/postfix/main.cf && \
     echo 'smtpd_tls_ask_ccert = yes' >> /etc/postfix/main.cf && \
     echo 'smtpd_tls_req_ccert = no' >> /etc/postfix/main.cf && \
+    echo "smtpd_tls_received_header = yes" >> /etc/postfix/main.cf && \
     mkdir /etc/postfix/conf.d
 
 # Hash files for access policies
