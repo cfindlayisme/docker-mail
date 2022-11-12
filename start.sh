@@ -4,12 +4,12 @@
 # License: LGPL v3.0
 echo "Generating dhparam keys (if needed)"
 
-if [ ! -f /etc/postfix/dh2048.pem ]; then
-    openssl dhparam -out /etc/postfix/dh2048.pem 2048
+if [ ! -f /config/dh2048.pem ]; then
+    openssl dhparam -out /config/dh2048.pem 2048
 fi
 
-if [ ! -f /etc/postfix/dh512.pem ]; then
-    openssl dhparam -out /etc/postfix/dh512.pem 512
+if [ ! -f /config/dh512.pem ]; then
+    openssl dhparam -out /config/dh512.pem 512
 fi
 
 # TODO: Won't change it properly if enviorment variable changes - should correct this so container doesn't need to be destroyed every time
