@@ -28,7 +28,10 @@ Volumes:
     - Format is EMAIL \<TAB\> EMAIL
     - ```aliased_email@example.com user@example.com```
 - /keys
-  - TODO: document this
+  - privkey.pem
+    - Private key for SSL
+  - fullchain.pem
+    - Certificate file for SSL
 - /vmail
   - Holds the actual virtual mailboxes (with trailing / in vmaps should be Maildir format)
   - TODO: Fix it so it's not static UID/GID of 1000
