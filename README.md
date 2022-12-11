@@ -12,6 +12,7 @@ Some more TODO:
 - Write logs to somewhere persistant
 - Address this:
   - postfix/postscreen[142]: warning: connect to private/tlsproxy service: No such file or directory
+- Gitlab CI tests to lint config (postconf -n inside container)
 
 Completed:
 - Incoming mail works
