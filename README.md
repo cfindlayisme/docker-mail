@@ -1,6 +1,6 @@
-Work in progress, intended to switch over to it eventually.
+Work in progress, using ProtonMail nowadays so this is more of a backup project in case I ever need to host my own mailserver.
 
-This is my mailserver in a docker container to make administration of it 10000% easier. Usual postfix/dovecot stack - nothing fancy. Low on resource usage so I can use tiny VMs to run it.
+Usual postfix/dovecot stack - nothing fancy. Low on resource usage so I can use tiny VMs to run it.
 
 Looked at IRedmail/mailinabox/mailcow and saw they were all just to big for what I wanted to run them on.
 
